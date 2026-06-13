@@ -1,0 +1,23 @@
+# The 2nd Summit
+
+> Practical ideas for building strength, purpose, and freedom after the career climb: fitness, healthy aging, community, and life design for professionals over 40.
+
+The 2nd Summit is the home of a channel and site where an experienced engineer and former engineering manager documents what he is testing, learning, using, and discovering to stay healthy, sharp, social, and engaged in the second half of life.
+
+## Pages
+
+- [Home](https://the2ndsummit.com/): Overview of The 2nd Summit, covering the core promise, the five content pillars (Move Daily, Eat Smart, Age Well, Stay Engaged, Engineer Your Life), and the story behind the channel.
+
+## About
+
+The first summit was career and family success. The second summit is creating an exceptional life afterward. The 2nd Summit shares practical discoveries from a semi-retired software engineer and former engineering manager who strength trains 5+ days per week, does weekly HIIT, eats clean, cycles regularly, walks the Strand almost daily, and plays pickleball. The goal is not to tell people what to do, but to show what was tried, why, what happened, and whether it is worth recommending. The audience decides what works for them.
+
+## Contact
+
+Connect through The 2nd Summit YouTube channel or at https://the2ndsummit.com/.
+
+## Additional Context
+
+- Built with: HTML, Tailwind CSS, TypeScript
+- Maintained by: Hal Hunt
+- Last updated: 2026-06-12

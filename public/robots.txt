@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# PLACEHOLDER: block any paths you do not want indexed
+# Disallow: /admin/
+# Disallow: /private/
+
+# AI/LLM crawlers - allow by default; restrict below if preferred
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://the2ndsummit.com/sitemap.xml
+
+# LLM context file
+# See: https://llmstxt.org
+# Located at: https://the2ndsummit.com/llms.txt
