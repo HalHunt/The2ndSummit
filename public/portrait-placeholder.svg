@@ -1,0 +1,27 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 320 400"
+  role="img"
+  aria-label="Placeholder for a portrait of Hal Hunt"
+>
+  <!-- Line-art placeholder. Replace this file with a real portrait of Hal Hunt
+       at the same 320x400 (4:5) ratio, or swap the img src in index.html. -->
+  <rect x="0.5" y="0.5" width="319" height="399" fill="none" stroke="#5f7268" stroke-width="1" stroke-dasharray="4 5" />
+  <g fill="none" stroke="#7d8f86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- head -->
+    <circle cx="160" cy="150" r="52" />
+    <!-- shoulders -->
+    <path d="M 70 330 C 78 256, 120 222, 160 222 C 200 222, 242 256, 250 330" />
+  </g>
+  <text
+    x="160"
+    y="372"
+    text-anchor="middle"
+    fill="#7d8f86"
+    font-family="'IBM Plex Mono', monospace"
+    font-size="13"
+    letter-spacing="3"
+  >
+    PORTRAIT PENDING
+  </text>
+</svg>

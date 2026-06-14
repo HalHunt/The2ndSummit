@@ -35,6 +35,44 @@ Usage rules:
 - Contour line art uses #3a5247 strokes at low opacity. It is decorative background only.
 - No colors outside this palette. No gradients anywhere.
 
+## Theming
+
+Night is the default and the brand identity. A light "paper map by day" theme is
+offered as an opt-in alternative via a toggle in the header. The system is
+single-source: every color flows through CSS custom properties defined in
+`src/style.css`, and the light theme is a token override under
+`:root[data-theme='light']`. Never hard-code a hex value in a rule; add or reuse
+a token so both themes stay in sync.
+
+Theme selection:
+
+- The active theme is the `data-theme` attribute on `<html>` (`dark` or `light`).
+- An inline script in `<head>` sets it before first paint to avoid a flash.
+- Default is `dark`. An explicit choice is remembered in `localStorage`
+  (`theme`). We do not auto-switch to the OS `prefers-color-scheme`, so the
+  night identity is always the first impression.
+- The toggle swaps a line-art moon (night) and sun (day) icon plus a mono label.
+
+Light palette (overrides only the tokens that change):
+
+| Token   | Light value | Note                                          |
+| ------- | ----------- | --------------------------------------------- |
+| night   | #eef1ed     | Page background: paper with a faint sage tint |
+| night-2 | #ffffff     | Raised surfaces                               |
+| line    | #c8d2cb     | Borders and hairlines                         |
+| snow    | #16241f     | Primary text (ink), ties back to night        |
+| mist    | #5b6b62     | Secondary text, holds AA on the light surface |
+| signal  | #ff6a3d     | Unchanged; used for fills (buttons, ticks)    |
+| gold    | #8a6d0f     | Darkened so mono labels keep AA on light      |
+
+Accent-on-light rule: pure signal (#ff6a3d) fails contrast as text on a light
+background, so a separate `--signal-text` token (#d6491a in light, plain signal
+in dark) is used wherever signal is text on a surface (hero phrase, the "2nd" in
+the wordmark, card title hover, the "watch" arrow). Signal stays pure where it is
+a fill carrying dark text or a marker. The rules of the Palette section ("signal
+is scarce", "never signal and gold on the same element", no gradients, no colors
+outside the documented sets) apply unchanged to both themes.
+
 ## Typography
 
 Three families, loaded from Google Fonts with only the weights listed:
@@ -77,8 +115,10 @@ The five pillars plus home, as equal-width cells with hairline separators:
 - WP-00 BASE CAMP (home), WP-01 MOVE DAILY, WP-02 EAT SMART, WP-03 AGE WELL,
   WP-04 STAY ENGAGED, WP-05 ENGINEER YOUR LIFE.
 - Each cell: gold mono waypoint code above a condensed caps name.
-- Active state: night-2 background plus a 3px inset signal underline.
-- Hover: night-2 background, snow text.
+- Resting cells carry the translucent surface fill (same as published video
+  cards), so every cell reads as a card.
+- Active state: solid night-2 background plus a 3px inset signal underline.
+- Hover: solid night-2 background, snow text.
 
 ### Hero
 
@@ -91,7 +131,8 @@ profile.
 The signature graphic. An SVG line chart of two summits: gold marker and label
 "FIRST SUMMIT: THE CAREER", signal marker "THE 2ND SUMMIT", and a pulsing signal
 ring labeled "YOU ARE HERE" on the ascent between them. Snow stroke, faint
-horizontal grid lines in line color, mono caption row beneath.
+horizontal grid lines in line color, mono caption row beneath. The panel sits on
+a solid night-2 surface so the contour background does not show through the chart.
 
 ### Video cards (field reports)
 
@@ -117,6 +158,9 @@ line is a planned one.
   no "WATCH ON YOUTUBE".
 - Border: 1px dashed line color. The signal tick becomes a hollow tick
   (1px signal outline, transparent fill).
+- Fill: solid night-2 surface, the same raised tone as the active waypoint cell.
+  It is opaque, which keeps it visibly distinct from the translucent fill of
+  published video cards (the contour background bleeds through those, not these).
 - Meta line: waypoint code plus pillar name only (no duration, no status).
 - Card bottom affordance: a row of pill tags (1px outline, fully rounded, mono
   caps). First the status, "PLANNED" or "IN PRODUCTION", in gold outline and
@@ -132,6 +176,15 @@ line is a planned one.
 - Primary: signal background, night text, Barlow Condensed 600 caps, square corners.
 - Ghost: transparent, 1px snow border, snow text; hover swaps border and text to signal.
 - Primary is reserved for the email signup. YouTube links use ghost.
+
+### Author portrait
+
+A single real photograph of Hal Hunt is allowed in the hero (and later an about
+context). This is the one permitted photographic image; it is an author portrait,
+not stock photography. Treatment: square corners, 1px line border, no rounded
+corners and no shadow, sitting on a night-2 surface, with a mono caption beneath
+("Hal Hunt / Surveyor"). It uses a 4:5 ratio. Until the real photo is supplied,
+a line-art placeholder (`/portrait-placeholder.svg`) stands in.
 
 ### Footer
 
@@ -191,6 +244,7 @@ Do:
 Don't:
 
 - No rounded corners, shadows, gradients, or glassmorphism.
-- No stock photography. Imagery is line art, SVG charts, and video thumbnails only.
+- No stock photography. Imagery is line art, SVG charts, video thumbnails, and a
+  single real author portrait of Hal Hunt (see "Author portrait").
 - No new fonts, no new colors, no emoji.
 - No card that pretends to be an article.

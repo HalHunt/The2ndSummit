@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+  /* Default theme: night (the brand identity). See DESIGN.md "Theming". */
   :root {
     --night: #101c19;
     --night-2: #16241f;
@@ -11,6 +12,53 @@
     --mist: #9fb0a7;
     --signal: #ff6a3d;
     --gold: #e8c45a;
+
+    /* Derived tokens (kept separate so the light theme can override them). */
+    --signal-hover: #ff8159;
+    --signal-text: var(--signal); /* signal used as text on a background */
+    --btn-text: #101c19; /* dark text on signal fills, both themes */
+    --surface: rgba(22, 36, 31, 0.6); /* card and panel fills */
+    --chart-line: var(--snow); /* elevation route stroke */
+    --chart-fill: rgba(233, 237, 233, 0.05); /* elevation route fill */
+    --chart-grid: #22332c; /* faint horizontal grid lines */
+    --chart-axis: #2c3f37; /* elevation baseline */
+    --contour-stroke: #3a5247; /* decorative background contours */
+    --contour-opacity: 0.55;
+    /* Opaque resting fill for the waypoint nav. Matches what the translucent
+       --surface renders as over the page, but solid, so the contour graph does
+       not show through the cells. Hover/active lift to --night-2. */
+    --nav-rest: #14211d;
+  }
+
+  /* Light theme: a paper map by day. Accents stay; surfaces and ink invert.
+     Gold and signal are darkened only where they sit as text on a light
+     surface so they keep AA contrast (see DESIGN.md "Theming"). */
+  :root[data-theme='light'] {
+    --night: #eef1ed;
+    --night-2: #ffffff;
+    --line: #c8d2cb;
+    --snow: #16241f;
+    --mist: #5b6b62;
+    --signal: #ff6a3d;
+    --gold: #8a6d0f;
+
+    --signal-hover: #e85628;
+    --signal-text: #d6491a;
+    --surface: rgba(255, 255, 255, 0.7);
+    --chart-line: #16241f;
+    --chart-fill: rgba(22, 36, 31, 0.06);
+    --chart-grid: #d4ddd6;
+    --chart-axis: #b9c4bc;
+    --contour-stroke: #cdd8d0;
+    --contour-opacity: 0.6;
+    /* Light contours are faint, so the translucent surface reads fine here. */
+    --nav-rest: var(--surface);
+  }
+
+  /* Suppress the per-element hover transitions during a theme switch so the
+     whole page does not animate at once (DESIGN.md: nothing else animates). */
+  .theme-switching * {
+    transition: none !important;
   }
 
   body {
@@ -51,7 +99,12 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.55;
+    opacity: var(--contour-opacity);
+  }
+
+  /* Themed via token; wins over the inline stroke attribute on the <g>. */
+  .contours g {
+    stroke: var(--contour-stroke);
   }
 
   .layer {
@@ -88,7 +141,7 @@
   }
 
   .wordmark .num {
-    color: var(--signal);
+    color: var(--signal-text);
   }
 
   .coords {
@@ -97,6 +150,57 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--mist);
+  }
+
+  /* Header meta: coordinates line plus the day/night toggle */
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mist);
+    background: var(--night-2);
+    border: 1px solid var(--line);
+    padding: 6px 10px;
+    cursor: pointer;
+    transition:
+      color 0.15s,
+      border-color 0.15s;
+  }
+
+  .theme-toggle:hover {
+    color: var(--snow);
+    border-color: var(--mist);
+  }
+
+  .theme-toggle svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+    stroke: currentColor;
+    fill: none;
+  }
+
+  /* Show the icon for the active theme: moon at night, sun by day. */
+  .theme-toggle .icon-sun {
+    display: none;
+  }
+
+  :root[data-theme='light'] .theme-toggle .icon-sun {
+    display: block;
+  }
+
+  :root[data-theme='light'] .theme-toggle .icon-moon {
+    display: none;
   }
 
   /* Waypoint nav */
@@ -109,9 +213,14 @@
     flex: 1;
     text-decoration: none;
     color: var(--mist);
+    /* Resting fill. Opaque in dark (no contour bleed-through), translucent in
+       light. Hover and active raise to solid night-2 below. */
+    background: var(--nav-rest);
     padding: 14px 4px 16px;
     border-left: 1px solid var(--line);
-    transition: background 0.15s;
+    transition:
+      background 0.15s,
+      color 0.15s;
   }
 
   .route-nav a:last-child {
@@ -188,7 +297,7 @@
 
   .hero-title em {
     font-style: normal;
-    color: var(--signal);
+    color: var(--signal-text);
   }
 
   .lede {
@@ -198,12 +307,121 @@
     max-width: 640px;
   }
 
+  /* Hero intro: author portrait beside the hero heading and lede */
+  .hero-intro {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'portrait label'
+      'portrait title'
+      'portrait lede';
+    align-items: start;
+    column-gap: 40px;
+  }
+
+  .hero-intro .sec-label {
+    grid-area: label;
+    margin-bottom: 16px;
+  }
+
+  .hero-intro .hero-title {
+    grid-area: title;
+  }
+
+  .hero-intro .portrait {
+    grid-area: portrait;
+  }
+
+  .hero-intro .lede {
+    grid-area: lede;
+    margin-top: 22px;
+  }
+
+  /* Author portrait (placeholder until a real photo is added) */
+  .portrait {
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .portrait-img {
+    display: block;
+    width: 240px;
+    height: 300px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    background: var(--night-2);
+  }
+
+  .portrait-cap {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mist);
+    padding-top: 10px;
+  }
+
+  @media (max-width: 700px) {
+    .hero-intro {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'label'
+        'title'
+        'portrait'
+        'lede';
+    }
+
+    .hero-intro .portrait {
+      margin-top: 24px;
+    }
+
+    /* Keep the portrait a modest author photo, not a full-width banner. */
+    .portrait-img {
+      width: min(220px, 55vw);
+      height: auto;
+      aspect-ratio: 4 / 5;
+    }
+  }
+
   /* Elevation profile */
   .profile {
     margin-top: 44px;
     border: 1px solid var(--line);
-    background: rgba(22, 36, 31, 0.6);
+    /* Solid raised surface so the contour background does not bleed through the
+       chart (most noticeable in the dark theme). */
+    background: var(--night-2);
     padding: 18px 18px 8px;
+  }
+
+  /* Elevation profile chart strokes, themed via tokens. The inline SVG
+     attributes carry the night-theme values; these CSS rules win in both
+     themes because presentation attributes sit at the bottom of the cascade. */
+  .profile .grid-line {
+    stroke: var(--chart-grid);
+  }
+
+  .profile .axis-line {
+    stroke: var(--chart-axis);
+  }
+
+  .profile .route-line {
+    stroke: var(--chart-line);
+  }
+
+  .profile .route-fill {
+    fill: var(--chart-fill);
+  }
+
+  .profile .profile-gold {
+    fill: var(--gold);
+  }
+
+  .profile .profile-signal-text {
+    fill: var(--signal-text);
+  }
+
+  .profile .profile-mist {
+    fill: var(--mist);
   }
 
   .profile svg {
@@ -244,7 +462,7 @@
   /* Published video cards: solid = surveyed route */
   .report-card {
     border: 1px solid var(--line);
-    background: rgba(22, 36, 31, 0.6);
+    background: var(--surface);
     padding: 22px 22px 26px;
     position: relative;
     display: flex;
@@ -267,7 +485,7 @@
   }
 
   .report-card:hover .card-title {
-    color: var(--signal);
+    color: var(--signal-text);
   }
 
   .card-watch {
@@ -282,7 +500,7 @@
 
   .card-watch::after {
     content: ' ->';
-    color: var(--signal);
+    color: var(--signal-text);
   }
 
   /* Planned report cards: dashed = planned route */
@@ -294,6 +512,10 @@
 
   .planned-card {
     border: 1px dashed var(--line);
+    /* Solid raised surface, same as the active waypoint cell. Opaque, so it
+       reads as a filled placeholder and stays distinct from the translucent
+       fill of the published video cards. */
+    background: var(--night-2);
     padding: 22px 22px 26px;
     position: relative;
     display: flex;
@@ -369,7 +591,7 @@
     text-transform: uppercase;
     text-decoration: none;
     padding: 13px 28px;
-    color: var(--night);
+    color: var(--btn-text);
     background: var(--signal);
     border: 1px solid var(--signal);
     cursor: pointer;
@@ -377,8 +599,8 @@
   }
 
   .btn:hover {
-    background: #ff8159;
-    border-color: #ff8159;
+    background: var(--signal-hover);
+    border-color: var(--signal-hover);
   }
 
   .btn-ghost {
@@ -496,7 +718,8 @@
 
     .route-nav a,
     .btn,
-    .report-card {
+    .report-card,
+    .theme-toggle {
       transition: none;
     }
   }
