@@ -55,6 +55,56 @@ if (publishedReports.length === 0) {
   publishedGrid.innerHTML = publishedReports.map(renderPublishedCard).join('');
 }
 
+// Day / night theme toggle. The initial theme is set by an inline script in
+// <head> (to avoid a flash); this only wires the button and persists changes.
+const THEME_COLORS: Record<string, string> = {
+  dark: '#101c19',
+  light: '#eef1ed',
+};
+
+const themeToggle = document.querySelector<HTMLButtonElement>('#theme-toggle');
+const themeLabel = themeToggle?.querySelector<HTMLSpanElement>('.theme-toggle-label');
+const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+
+function syncThemeButton(theme: string): void {
+  const isLight = theme === 'light';
+  if (themeToggle) {
+    themeToggle.setAttribute('aria-pressed', String(isLight));
+    themeToggle.setAttribute(
+      'aria-label',
+      isLight ? 'Switch to dark theme' : 'Switch to light theme'
+    );
+  }
+  if (themeLabel) {
+    themeLabel.textContent = isLight ? 'Day' : 'Night';
+  }
+  if (themeMeta) {
+    themeMeta.content = THEME_COLORS[theme] ?? THEME_COLORS.dark;
+  }
+}
+
+syncThemeButton(document.documentElement.dataset.theme ?? 'dark');
+
+themeToggle?.addEventListener('click', () => {
+  const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+
+  // Suppress hover transitions for one frame so the page does not animate
+  // every surface at once during the switch.
+  document.documentElement.classList.add('theme-switching');
+  document.documentElement.dataset.theme = next;
+  requestAnimationFrame(() => {
+    document.documentElement.classList.remove('theme-switching');
+  });
+
+  try {
+    localStorage.setItem('theme', next);
+  } catch {
+    // Storage unavailable (private mode, etc.); the choice just will not persist.
+  }
+
+  syncThemeButton(next);
+});
+
 const form = document.querySelector<HTMLFormElement>('#signup-form');
 const status = document.querySelector<HTMLParagraphElement>('#signup-status');
 
