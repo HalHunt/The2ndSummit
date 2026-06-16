@@ -23,7 +23,7 @@
     --chart-grid: #22332c; /* faint horizontal grid lines */
     --chart-axis: #2c3f37; /* elevation baseline */
     --contour-stroke: #3a5247; /* decorative background contours */
-    --contour-opacity: 0.55;
+    --contour-opacity: 0.32;
     /* Opaque resting fill for the waypoint nav. Matches what the translucent
        --surface renders as over the page, but solid, so the contour graph does
        not show through the cells. Hover/active lift to --night-2. */
@@ -49,9 +49,9 @@
     --chart-fill: rgba(22, 36, 31, 0.06);
     --chart-grid: #d4ddd6;
     --chart-axis: #b9c4bc;
-    --contour-stroke: #cdd8d0;
-    --contour-opacity: 0.6;
-    /* Light contours are faint, so the translucent surface reads fine here. */
+    --contour-stroke: #7a9e8e;
+    --contour-opacity: 0.48;
+    /* Light contours use a darker stroke so they read against the pale background. */
     --nav-rest: var(--surface);
   }
 
@@ -100,6 +100,14 @@
     z-index: 0;
     pointer-events: none;
     opacity: var(--contour-opacity);
+    -webkit-mask-image:
+      linear-gradient(to right, black 30%, transparent 52%),
+      linear-gradient(to left, black 30%, transparent 52%);
+    -webkit-mask-composite: source-over;
+    mask-image:
+      linear-gradient(to right, black 30%, transparent 52%),
+      linear-gradient(to left, black 30%, transparent 52%);
+    mask-composite: add;
   }
 
   /* Themed via token; wins over the inline stroke attribute on the <g>. */
@@ -442,20 +450,23 @@
   }
 
   .pulse {
-    animation: pulse 2.4s ease-in-out infinite;
+    animation: pulse 2.4s ease-out infinite;
     transform-box: fill-box;
     transform-origin: center;
   }
 
+  .pulse-delay {
+    animation-delay: 1.2s;
+  }
+
   @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
+    0% {
+      opacity: 0.9;
       transform: scale(1);
     }
-    50% {
-      opacity: 0.3;
-      transform: scale(1.7);
+    100% {
+      opacity: 0;
+      transform: scale(3.5);
     }
   }
 
@@ -712,7 +723,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pulse {
+    .pulse,
+    .pulse-delay {
       animation: none;
     }
 
