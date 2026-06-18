@@ -105,6 +105,28 @@ themeToggle?.addEventListener('click', () => {
   syncThemeButton(next);
 });
 
+// Elevation profile: draw the route line and reveal markers on scroll into view.
+const routeLineEl = document.querySelector<SVGPathElement>('.route-line');
+const profileEl = document.querySelector<HTMLElement>('.profile');
+
+if (routeLineEl && profileEl && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const len = routeLineEl.getTotalLength();
+  routeLineEl.style.strokeDasharray = String(len);
+  routeLineEl.style.strokeDashoffset = String(len);
+  profileEl.classList.add('profile-will-animate');
+
+  new IntersectionObserver(
+    (entries, observer) => {
+      if (entries[0].isIntersecting) {
+        profileEl.classList.remove('profile-will-animate');
+        profileEl.classList.add('profile-animated');
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.4 }
+  ).observe(profileEl);
+}
+
 const form = document.querySelector<HTMLFormElement>('#signup-form');
 const status = document.querySelector<HTMLParagraphElement>('#signup-status');
 

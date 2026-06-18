@@ -19,13 +19,13 @@ export interface PublishedReport {
 export const publishedReports: PublishedReport[] = [
   {
     kind: 'published',
-    waypoint: 'WP-00',
-    pillar: 'Base Camp',
+    waypoint: 'WP-03',
+    pillar: 'Age Well',
     contentType: 'Video',
-    duration: '8:32',
-    title: 'Welcome to Base Camp: What This Channel Is Testing',
-    description: 'Who is climbing, why the second summit, and what a field report looks like.',
-    url: 'https://www.youtube.com/@the2ndsummit',
+    duration: '5:56',
+    title: 'I Never Questioned These Products for Decades. Then I Scanned Them!',
+    description: 'After turning 50, I started taking a closer look at the everyday products I use.  Using ingredient-rating apps and product research tools, I reviewed many of the personal care products that had been part of my daily routine for years. Some scored surprisingly well, while others scored much lower than I expected.  This video walks through the products I replaced, what I switched to, and the ratings that influenced those decisions.',
+    url: 'https://youtu.be/WoOqG7UFsdg',
   },
 ];
 
