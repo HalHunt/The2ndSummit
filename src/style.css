@@ -722,6 +722,40 @@
     }
   }
 
+  /* Route-draw and marker-reveal animations (triggered by JS via IntersectionObserver) */
+  @keyframes route-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes marker-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* Markers hidden while waiting for the animation to start */
+  .profile-will-animate .profile-marker {
+    opacity: 0;
+  }
+
+  /* Route line draws left-to-right; stroke-dasharray/offset set by JS */
+  .profile-animated .route-line {
+    animation: route-draw 2.8s ease-in-out forwards;
+  }
+
+  /* Each marker group fades in as the line reaches it.
+     animation-fill-mode: both keeps opacity:0 during the delay. */
+  .profile-animated .profile-marker-career {
+    animation: marker-fade-in 0.35s ease-out 1.0s both;
+  }
+
+  .profile-animated .profile-marker-here {
+    animation: marker-fade-in 0.35s ease-out 2.07s both;
+  }
+
+  .profile-animated .profile-marker-summit {
+    animation: marker-fade-in 0.5s ease-out 2.5s both;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .pulse,
     .pulse-delay {
@@ -733,6 +767,17 @@
     .report-card,
     .theme-toggle {
       transition: none;
+    }
+
+    /* Show markers immediately; skip the draw animation */
+    .profile-will-animate .profile-marker,
+    .profile-animated .profile-marker {
+      opacity: 1;
+    }
+
+    .profile-animated .route-line {
+      animation: none;
+      stroke-dashoffset: 0 !important;
     }
   }
 }
