@@ -22,10 +22,10 @@ export const publishedReports: PublishedReport[] = [
     waypoint: 'WP-03',
     pillar: 'Age Well',
     contentType: 'Video',
-    duration: '5:56',
-    title: 'I Never Questioned These Products for Decades. Then I Scanned Them!',
+    duration: '3:54',
+    title: 'I Scanned the Trusted Brands in My Bathroom. Most Scored a Zero.',
     description: 'After turning 50, I started taking a closer look at the everyday products I use.  Using ingredient-rating apps and product research tools, I reviewed many of the personal care products that had been part of my daily routine for years. Some scored surprisingly well, while others scored much lower than I expected.  This video walks through the products I replaced, what I switched to, and the ratings that influenced those decisions.',
-    url: 'https://youtu.be/WoOqG7UFsdg',
+    url: 'https://youtu.be/Ck9Rcbev4-8',
   },
 ];
 
