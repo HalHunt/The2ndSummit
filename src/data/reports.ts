@@ -19,6 +19,16 @@ export interface PublishedReport {
 export const publishedReports: PublishedReport[] = [
   {
     kind: 'published',
+    waypoint: 'WP-01',
+    pillar: 'Move Daily',
+    contentType: 'Video',
+    duration: '5:08',
+    title: 'I Reengineered My Workouts at 55 (Nothing Here Is New)',
+    description: 'At 55, I rarely run the same workout twice. Not because I found a secret, but because nothing in my routine is new. The system is. A year ago I tore down my whole training routine and rebuilt it like an engineer. Same gym, same body, completely different approach. In this video I walk through the system I use to hold onto muscle and visible abs at 55: four exercises per body part, five pyramid sets each, and a rolling cycle that ignores the calendar entirely. None of the individual pieces are mine. Pyramid sets, muscle confusion, training near failure, you have heard all of it before. The point is the way they fit together.',
+    url: 'https://youtu.be/qCj2VvQp33M',
+  },
+  {
+    kind: 'published',
     waypoint: 'WP-03',
     pillar: 'Age Well',
     contentType: 'Video',
@@ -78,13 +88,5 @@ export const plannedReports: PlannedReport[] = [
     status: 'Planned',
     title: 'How I Organize My Life Like a Software System',
     description: 'Inputs, feedback loops, and failure modes for a week instead of a codebase.',
-  },
-  {
-    kind: 'planned',
-    waypoint: 'WP-01',
-    pillar: 'Move Daily',
-    status: 'Planned',
-    title: 'The Workout Changes I Made After 50',
-    description: 'What I dropped, what I kept, and what surprised me.',
-  },
+  }
 ];
