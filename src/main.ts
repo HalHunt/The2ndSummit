@@ -30,7 +30,8 @@ function renderPublishedCard(report: PublishedReport): string {
       <p class="card-meta">${report.waypoint} ${report.pillar} / ${report.contentType} ${report.duration}</p>
       <h3 class="card-title">${report.title}</h3>
       <p class="card-desc">${report.description}</p>
-      <p class="card-watch">Watch on YouTube</p>
+      <p class="card-watch">Watch on YouTube<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 9h5M9 6.5l2.5 2.5-2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+
     </a>`;
 }
 

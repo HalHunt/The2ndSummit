@@ -15,6 +15,7 @@ These rules apply to ALL text written in this project: site copy, metadata, mark
 
 - NEVER use em dashes (—) or en dashes (–). Use a comma, colon, period, or plain hyphen (-) instead.
 - NEVER use emoticons or emoji (no :), ;-), or Unicode emoji characters).
+- NEVER use Python for debugging on CLI tools
 
 ## Brand Rules
 

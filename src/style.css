@@ -28,6 +28,24 @@
        --surface renders as over the page, but solid, so the contour graph does
        not show through the cells. Hover/active lift to --night-2. */
     --nav-rest: #14211d;
+
+    /* Footer mountain silhouette (DESIGN.md "Footer"). --ridge is a deliberately
+       fixed dark ink (it happens to equal dark-theme night-2 but does NOT track
+       it). Holding it constant while the page background inverts is what flips
+       the silhouette per theme: a subtly raised ridge over the night page here,
+       a bold dark-ink silhouette over the light paper below. Do not change this
+       to var(--night-2): that resolves to #ffffff in light theme and the
+       mountain would vanish on the paper. --ridge-text is the footer credits
+       sitting on the dark mass, so it is a fixed light tone in both themes (no
+       light-theme override). */
+    --ridge: #16241f;
+    --ridge-text: #e9ede9;
+    /* Footer link/divider tones. Like --ridge-text these sit on the fixed dark
+       mass and must stay constant in both themes (no light override), so the
+       footer reads identically by day and night. --ridge-muted dims the static
+       credits beneath the interactive section links. */
+    --ridge-line: rgba(233, 237, 233, 0.16);
+    --ridge-muted: rgba(233, 237, 233, 0.62);
   }
 
   /* Light theme: a paper map by day. Accents stay; surfaces and ink invert.
@@ -473,7 +491,8 @@
   /* Published video cards: solid = surveyed route */
   .report-card {
     border: 1px solid var(--line);
-    background: var(--surface);
+    /* Opaque raised surface, matching the planned route cards. */
+    background: var(--night-2);
     padding: 22px 22px 26px;
     position: relative;
     display: flex;
@@ -509,9 +528,26 @@
     padding-top: 18px;
   }
 
-  .card-watch::after {
-    content: ' ->';
+  .card-watch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-watch svg {
     color: var(--signal-text);
+    flex-shrink: 0;
+  }
+
+  /* Published cards: one full-width card per row */
+  #published-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  #published-grid .card-watch {
+    align-self: flex-end;
   }
 
   /* Planned report cards: dashed = planned route */
@@ -523,9 +559,8 @@
 
   .planned-card {
     border: 1px dashed var(--line);
-    /* Solid raised surface, same as the active waypoint cell. Opaque, so it
-       reads as a filled placeholder and stays distinct from the translucent
-       fill of the published video cards. */
+    /* Solid raised surface, same as the active waypoint cell and the
+       published video cards. */
     background: var(--night-2);
     padding: 22px 22px 26px;
     position: relative;
@@ -692,18 +727,75 @@
 
   /* Footer */
   .site-footer {
-    border-top: 1px solid var(--line);
-    padding-top: 28px;
-    padding-bottom: 56px;
+    position: relative;
+    margin-top: 64px;
+  }
+
+  /* A mountain range closes the page, traced from the brand reference. The ridge
+     band draws the silhouette; its fill is solid across the full width at the
+     base and the .footer-mass block below continues that same fill, so the
+     credits sit on the mountain. Full-bleed so it reads as a range, not a 1020px
+     clipping. Decorative only (aria-hidden), so it carries no information. */
+  .footer-ridge {
+    display: block;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    height: 200px;
+    margin-bottom: -1px; /* seam guard: overlap the mass so no hairline gap shows */
+    pointer-events: none;
+  }
+
+  .footer-ridge .ridge-fill {
+    fill: var(--ridge);
+  }
+
+  .footer-mass {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background: var(--ridge);
+  }
+
+  .footer-inner {
+    padding-top: 32px;
+    padding-bottom: 44px;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--ridge-line);
+  }
+
+  .footer-nav a {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--mist);
+    text-decoration: none;
+    color: var(--ridge-text);
+    transition: color 0.2s ease;
+  }
+
+  .footer-nav a:hover,
+  .footer-nav a:focus-visible {
+    color: var(--signal);
+  }
+
+  .footer-credits {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 8px 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ridge-muted);
   }
 
   @media (max-width: 860px) {
@@ -720,16 +812,27 @@
     .cta {
       padding: 24px;
     }
+
+    .footer-credits {
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 
   /* Route-draw and marker-reveal animations (triggered by JS via IntersectionObserver) */
   @keyframes route-draw {
-    to { stroke-dashoffset: 0; }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 
   @keyframes marker-fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   /* Markers hidden while waiting for the animation to start */
@@ -745,7 +848,7 @@
   /* Each marker group fades in as the line reaches it.
      animation-fill-mode: both keeps opacity:0 during the delay. */
   .profile-animated .profile-marker-career {
-    animation: marker-fade-in 0.35s ease-out 1.0s both;
+    animation: marker-fade-in 0.35s ease-out 1s both;
   }
 
   .profile-animated .profile-marker-here {

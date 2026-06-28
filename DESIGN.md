@@ -188,8 +188,29 @@ a line-art placeholder (`/portrait-placeholder.svg`) stands in.
 
 ### Footer
 
-Hairline top border, two mono micro-lines: "THE 2ND SUMMIT" left, attribution right.
-Attribution is always "Hal Hunt".
+A full-bleed SVG mountain range closes the page, its ridgeline traced from the
+brand reference: a broad left summit, a long central saddle, and a taller,
+sharper peak right of center with descending shoulders and minor sub-bumps. It is
+a clean silhouette (no outline stroke), decorative only (aria-hidden), carries no
+information, and is `pointer-events: none`. It is one drawn vector, not a photo,
+and uses no gradient. The mass fills the whole footer: the ridge band's fill is
+solid across the full width at its base and the block below continues that same
+fill, so the three mono credit lines sit on the mountain, not beneath it. There
+is no separator line. The silhouette is drawn in a 1440x200 viewBox with
+`preserveAspectRatio="none"`, so it stretches to any width; the relief is
+exaggerated enough that the summits still read as mountains when stretched.
+
+The mass fills with `--ridge` and the credits use `--ridge-text`. `--ridge` is a
+deliberately fixed dark ink: it happens to equal dark-theme night-2 but does not
+track it, and `--ridge-text` is a fixed light tone. Holding both constant while
+the page background inverts is what flips the scene per theme: a subtly raised
+ridge over the night page, and a bold dark-ink silhouette over the light paper,
+with the light credits legible on the dark mass in both. Do not retokenize
+`--ridge` to `var(--night-2)` or `--ridge-text` to `var(--snow)`: both resolve to
+the wrong end in light theme and the mountain or its text would disappear.
+
+The three mono micro-lines: "THE 2ND SUMMIT" left, "SURVEYED BY HAL HUNT" center,
+copyright right. Attribution is always "Hal Hunt".
 
 ## Motion
 
