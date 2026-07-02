@@ -603,6 +603,25 @@
     color: var(--mist);
   }
 
+  .card-desc p,
+  .card-desc ol {
+    margin: 0 0 10px;
+  }
+
+  .card-desc ol {
+    list-style: decimal;
+    padding-left: 20px;
+  }
+
+  .card-desc li {
+    margin-bottom: 4px;
+  }
+
+  .card-desc p:last-child,
+  .card-desc ol:last-child {
+    margin-bottom: 0;
+  }
+
   .card-tags {
     display: flex;
     flex-wrap: wrap;

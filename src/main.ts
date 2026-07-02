@@ -9,13 +9,47 @@ import {
 // TODO: set to the newsletter provider's subscribe endpoint when one is chosen.
 const NEWSLETTER_ENDPOINT = '';
 
+// Descriptions in reports.ts are plain text: blank lines start a new
+// paragraph, and a block where every line starts "1. ", "2. ", etc. renders
+// as a numbered list. This turns that plain text into the card's markup.
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function renderDescription(description: string): string {
+  const blocks = description.trim().split(/\n\s*\n/);
+
+  return blocks
+    .map((block) => {
+      const lines = block
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0);
+
+      const isNumberedList = lines.length > 0 && lines.every((line) => /^\d+\.\s+/.test(line));
+
+      if (isNumberedList) {
+        const items = lines
+          .map((line) => `<li>${escapeHtml(line.replace(/^\d+\.\s+/, ''))}</li>`)
+          .join('');
+        return `<ol>${items}</ol>`;
+      }
+
+      return `<p>${escapeHtml(lines.join(' '))}</p>`;
+    })
+    .join('');
+}
+
 function renderPlannedCard(report: PlannedReport): string {
   return `
     <article class="planned-card">
       <span class="tick" aria-hidden="true"></span>
       <p class="card-meta">${report.waypoint} ${report.pillar}</p>
       <h3 class="card-title">${report.title}</h3>
-      <p class="card-desc">${report.description}</p>
+      <div class="card-desc">${renderDescription(report.description)}</div>
       <p class="card-tags">
         <span class="card-tag card-tag-status">${report.status}</span>
         <span class="card-tag">Report pending</span>
@@ -29,7 +63,7 @@ function renderPublishedCard(report: PublishedReport): string {
       <span class="tick" aria-hidden="true"></span>
       <p class="card-meta">${report.waypoint} ${report.pillar} / ${report.contentType} ${report.duration}</p>
       <h3 class="card-title">${report.title}</h3>
-      <p class="card-desc">${report.description}</p>
+      <div class="card-desc">${renderDescription(report.description)}</div>
       <p class="card-watch">Watch on YouTube<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 9h5M9 6.5l2.5 2.5-2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
 
     </a>`;
