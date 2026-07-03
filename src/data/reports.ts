@@ -12,6 +12,7 @@ export interface PublishedReport {
   title: string;
   description: string;
   url: string;
+  thumbnail: string;
 }
 
 // TODO: FAKE preview data. Replace with the RSS-fed build step once the
@@ -39,6 +40,7 @@ export const publishedReports: PublishedReport[] = [
     
     Two of these did almost all the work.  I am honest in the video about which two, which one barely moved the needle, and which one is still a coin flip I keep anyway. There is also a strange one I am testing next that most people would call the opposite of a sleep tip.`,
     url: 'https://youtu.be/nDrCkvxgtzI',
+    thumbnail: '/thumbnail-sleep.webp',
   },
   {
     kind: 'published',
@@ -57,6 +59,7 @@ export const publishedReports: PublishedReport[] = [
 
     The one rule underneath all of it: sweat every day.`,
     url: 'https://youtu.be/qCj2VvQp33M',
+    thumbnail: '/thumbnail-strength.webp',
   },
   {
     kind: 'published',
@@ -73,6 +76,7 @@ export const publishedReports: PublishedReport[] = [
     
     Yuka.io is free and not affiliated with this channel. A low score means an ingredient is flagged as a potential hazard, not that a product is proven harmful. This is what I found and what I chose. Decide for yourself.`,
     url: 'https://youtu.be/Ck9Rcbev4-8',
+    thumbnail: '/thumbnail-yuka.webp',
   },
 ];
 
