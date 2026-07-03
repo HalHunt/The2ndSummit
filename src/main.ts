@@ -50,10 +50,12 @@ function renderPlannedCard(report: PlannedReport): string {
       <p class="card-meta">${report.waypoint} ${report.pillar}</p>
       <h3 class="card-title">${report.title}</h3>
       <div class="card-desc">${renderDescription(report.description)}</div>
-      <p class="card-tags">
-        <span class="card-tag card-tag-status">${report.status}</span>
-        <span class="card-tag">Report pending</span>
-      </p>
+      <div class="card-footer">
+        <p class="card-tags">
+          <span class="card-tag card-tag-status">${report.status}</span>
+          <span class="card-tag">Report pending</span>
+        </p>
+      </div>
     </article>`;
 }
 
@@ -64,8 +66,13 @@ function renderPublishedCard(report: PublishedReport): string {
       <p class="card-meta">${report.waypoint} ${report.pillar} / ${report.contentType} ${report.duration}</p>
       <h3 class="card-title">${report.title}</h3>
       <div class="card-desc">${renderDescription(report.description)}</div>
-      <p class="card-watch">Watch on YouTube<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 9h5M9 6.5l2.5 2.5-2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
-
+      <div class="card-footer">
+        <p class="card-tags">
+          <span class="card-tag card-tag-status">Surveyed</span>
+          <span class="card-tag">Report complete</span>
+        </p>
+        <p class="card-watch">Watch on YouTube<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 9h5M9 6.5l2.5 2.5-2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+      </div>
     </a>`;
 }
 

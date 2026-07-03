@@ -520,23 +520,37 @@
 
   .card-watch {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-top: auto;
-    padding-top: 18px;
-  }
-
-  .card-watch {
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
   .card-watch svg {
-    color: var(--signal-text);
     flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+
+  .card-watch svg circle {
+    fill: var(--signal);
+    stroke: none;
+    transition: fill 0.15s;
+  }
+
+  .card-watch svg path {
+    stroke: var(--btn-text);
+  }
+
+  .report-card:hover .card-watch svg {
+    transform: translateX(3px);
+  }
+
+  .report-card:hover .card-watch svg circle {
+    fill: var(--signal-hover);
   }
 
   /* Published cards: one full-width card per row */
@@ -546,8 +560,14 @@
     gap: 18px;
   }
 
-  #published-grid .card-watch {
-    align-self: flex-end;
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
   }
 
   /* Planned report cards: dashed = planned route */
@@ -644,6 +664,23 @@
   .card-tag-status {
     color: var(--gold);
     border-color: var(--gold);
+  }
+
+  .card-footer .card-tags {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  /* Planned cards have no watch link below the footer, so the footer itself
+     needs to be pushed to the bottom of the card instead of the tags row. */
+  .planned-card .card-footer {
+    margin-top: auto;
+  }
+
+  /* margin-top: auto collapses to 0 when the description fills the card,
+     leaving the separator bar flush against the text. Force a floor. */
+  .planned-card .card-desc {
+    margin-bottom: 18px;
   }
 
   /* Buttons */
@@ -835,6 +872,20 @@
     .footer-credits {
       flex-direction: column;
       gap: 10px;
+    }
+
+    .card-footer {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+    }
+
+    .card-footer .card-tags {
+      align-self: flex-start;
+    }
+
+    .card-watch {
+      white-space: nowrap;
     }
   }
 

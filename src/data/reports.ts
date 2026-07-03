@@ -96,6 +96,14 @@ export const plannedReports: PlannedReport[] = [
   },
   {
     kind: 'planned',
+    waypoint: 'WP-01',
+    pillar: 'Move Daily',
+    status: 'Planned',
+    title: 'Why I Still Ride a Fixed Gear on the Strand',
+    description: 'Eight miles a day, one gear, no motor to bail me out.',
+  },
+  {
+    kind: 'planned',
     waypoint: 'WP-02',
     pillar: 'Eat Smart',
     status: 'Planned',
@@ -104,11 +112,11 @@ export const plannedReports: PlannedReport[] = [
   },
   {
     kind: 'planned',
-    waypoint: 'WP-04',
-    pillar: 'Stay Engaged',
+    waypoint: 'WP-02',
+    pillar: 'Eat Smart',
     status: 'Planned',
-    title: 'What Pickleball Gave Me That the Gym Never Could',
-    description: 'The workout was never the point.',
+    title: 'The Only 4 Supplements I Actually Take',
+    description: 'Creatine, protein, water, and the caffeine I gave up to get there.',
   },
   {
     kind: 'planned',
@@ -117,6 +125,22 @@ export const plannedReports: PlannedReport[] = [
     status: 'Planned',
     title: 'What My Dentist Taught Me About Teeth Whitening',
     description: 'Practical takeaways from the chair, no products to sell.',
+  },
+  {
+    kind: 'planned',
+    waypoint: 'WP-03',
+    pillar: 'Age Well',
+    status: 'Planned',
+    title: 'I Took a Cold Shower Every Night for a Year',
+    description: 'What discipline looks like once it stops being a decision.',
+  },
+  {
+    kind: 'planned',
+    waypoint: 'WP-04',
+    pillar: 'Stay Engaged',
+    status: 'Planned',
+    title: 'What Pickleball Gave Me That the Gym Never Could',
+    description: 'The workout was never the point.',
   },
   {
     kind: 'planned',
