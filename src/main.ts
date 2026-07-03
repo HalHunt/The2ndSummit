@@ -63,6 +63,15 @@ function renderPublishedCard(report: PublishedReport): string {
   return `
     <a class="report-card" href="${report.url}" target="_blank" rel="noopener">
       <span class="tick" aria-hidden="true"></span>
+      <img
+        class="card-thumb"
+        src="${report.thumbnail}"
+        width="1280"
+        height="720"
+        loading="lazy"
+        decoding="async"
+        alt="${escapeHtml(report.title)}"
+      />
       <p class="card-meta">${report.waypoint} ${report.pillar} / ${report.contentType} ${report.duration}</p>
       <h3 class="card-title">${report.title}</h3>
       <div class="card-desc">${renderDescription(report.description)}</div>

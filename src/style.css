@@ -510,6 +510,15 @@
     background: var(--signal);
   }
 
+  .card-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    margin-bottom: 18px;
+  }
+
   .report-card:hover {
     border-color: var(--signal);
   }
