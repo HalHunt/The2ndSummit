@@ -15,9 +15,24 @@ export interface PublishedReport {
   thumbnail: string;
 }
 
-// TODO: FAKE preview data. Replace with the RSS-fed build step once the
-// channel publishes. The URL points at the channel, not a real video.
 export const publishedReports: PublishedReport[] = [
+  {
+    kind: 'published',
+    waypoint: 'WP-01',
+    pillar: 'Move Daily',
+    contentType: 'Video',
+    duration: '4:30',
+    title: 'Pickleball Sidelined Me at 55. I\'m Going Back Anyway.',
+    description: `Everybody says pickleball is the safe, low impact sport. Eight weeks in, at 55, it put me on the couch for a week.
+
+    I didn't start playing to chase a trend. I started because I missed competing, and pickleball brought that back. Then two injuries in eight weeks made me actually look up what the data says about how safe this sport is for people my age. It surprised me.
+
+    This isn't a warning and it isn't a hype video. It's one guy reporting what happened, what the numbers actually say, and why a sore back is nowhere near enough to keep me off the court. You decide what any of it means for you.
+
+    More experiments at the2ndsummit.com. Subscribe if you're building a strong second half of life and want to see what works and what doesn't. One experiment at a time. That's how I'm figuring out the back half of life.`,
+    url: 'https://youtu.be/uCzqr91_boU',
+    thumbnail: '/thumbnail-pickleball.webp',
+  },  
   {
     kind: 'published',
     waypoint: 'WP-03',
@@ -38,7 +53,9 @@ export const publishedReports: PublishedReport[] = [
     3. A morning routine of protein and early sunlight. 
     4. Box breathing to quiet my brain at night.
     
-    Two of these did almost all the work.  I am honest in the video about which two, which one barely moved the needle, and which one is still a coin flip I keep anyway. There is also a strange one I am testing next that most people would call the opposite of a sleep tip.`,
+    Two of these did almost all the work.  I am honest in the video about which two, which one barely moved the needle, and which one is still a coin flip I keep anyway. There is also a strange one I am testing next that most people would call the opposite of a sleep tip.
+    
+    More experiments at the2ndsummit.com. Subscribe if you're building a strong second half of life and want to see what works and what doesn't. One experiment at a time. That's how I'm figuring out the back half of life.`,
     url: 'https://youtu.be/nDrCkvxgtzI',
     thumbnail: '/thumbnail-sleep.webp',
   },
@@ -57,7 +74,9 @@ export const publishedReports: PublishedReport[] = [
 
     This isn't coaching and I'm not a trainer. It is just what I do, why I do it, and whether I would recommend it. Take the parts that are useful to you and leave the rest.
 
-    The one rule underneath all of it: sweat every day.`,
+    The one rule underneath all of it: sweat every day.
+    
+    More experiments at the2ndsummit.com. Subscribe if you're building a strong second half of life and want to see what works and what doesn't. One experiment at a time. That's how I'm figuring out the back half of life.`,
     url: 'https://youtu.be/qCj2VvQp33M',
     thumbnail: '/thumbnail-strength.webp',
   },
@@ -74,7 +93,9 @@ export const publishedReports: PublishedReport[] = [
 
     I'm Hal Hunt. The 2nd Summit is where I document what I'm testing, using, and discovering to stay healthy, sharp, and engaged in the second half of life. If that's your kind of thing, subscribe and come along.
     
-    Yuka.io is free and not affiliated with this channel. A low score means an ingredient is flagged as a potential hazard, not that a product is proven harmful. This is what I found and what I chose. Decide for yourself.`,
+    Yuka.io is free and not affiliated with this channel. A low score means an ingredient is flagged as a potential hazard, not that a product is proven harmful. This is what I found and what I chose. Decide for yourself.
+    
+    More experiments at the2ndsummit.com. Subscribe if you're building a strong second half of life and want to see what works and what doesn't. One experiment at a time. That's how I'm figuring out the back half of life.`,
     url: 'https://youtu.be/Ck9Rcbev4-8',
     thumbnail: '/thumbnail-yuka.webp',
   },
@@ -135,16 +156,8 @@ export const plannedReports: PlannedReport[] = [
     waypoint: 'WP-03',
     pillar: 'Age Well',
     status: 'Planned',
-    title: 'I Took a Cold Shower Every Night for a Year',
+    title: 'I Took a Cold Shower Every Night for 6 months',
     description: 'What discipline looks like once it stops being a decision.',
-  },
-  {
-    kind: 'planned',
-    waypoint: 'WP-04',
-    pillar: 'Stay Engaged',
-    status: 'Planned',
-    title: 'What Pickleball Gave Me That the Gym Never Could',
-    description: 'The workout was never the point.',
   },
   {
     kind: 'planned',
