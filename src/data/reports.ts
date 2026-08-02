@@ -18,6 +18,40 @@ export interface PublishedReport {
 export const publishedReports: PublishedReport[] = [
   {
     kind: 'published',
+    waypoint: 'WP-02',
+    pillar: 'Eat Smart',
+    contentType: 'Video',
+    duration: '5:29',
+    title: 'I Tracked My Food for 10 Months. The Number I Chased Was a Myth.',
+    description: `I tested Hungryroot for 10 months, ate almost the same 5 meals the whole
+      time, then added up my own order data. What I found about my protein
+      "target" surprised me.
+
+      I'm Hal Hunt. On this channel I test things in the second half of life and
+      report what actually happened, not what's supposed to happen. This one is
+      about how my food narrowed to a handful of repeat meals on its own, what
+      that fixed, and the one number I'd been chasing for no good reason.
+
+      No sponsorship. No affiliate link. Nobody paid for this. It's just what I eat.
+
+      What I cover:
+
+      1. Why I stopped planning meals and let a short list take over.
+      2. How I use known-calorie meals to adjust instead of counting macros.
+      3. The portion-control problem this quietly solved.
+      4. Pulling 10 months of order history and running the numbers.
+      5. The 1-gram-per-pound protein rule, and what the research on lifters my age actually supports.
+
+      A note on the protein part: I'm not a doctor or a dietitian. This is my
+      own reading of my own data, and one person's experience. Do your own
+      homework and decide for yourself.
+
+      More experiments at the2ndsummit.com. Subscribe if you're building a strong second half of life and want to see what works and what doesn't. One experiment at a time. That's how I'm figuring out the back half of life.`,
+    url: 'https://youtu.be/3XibrGbLYfY',
+    thumbnail: '/thumbnail-hungryroot.webp',
+  },   
+  {
+    kind: 'published',
     waypoint: 'WP-01',
     pillar: 'Move Daily',
     contentType: 'Video',
@@ -126,14 +160,6 @@ export const plannedReports: PlannedReport[] = [
     status: 'Planned',
     title: 'Why I Still Ride a Fixed Gear on the Strand',
     description: 'Eight miles a day, one gear, no motor to bail me out.',
-  },
-  {
-    kind: 'planned',
-    waypoint: 'WP-02',
-    pillar: 'Eat Smart',
-    status: 'Planned',
-    title: 'I Tried Hungryroot for 90 Days',
-    description: 'A meal service run like a controlled trial, costs included.',
   },
   {
     kind: 'planned',
