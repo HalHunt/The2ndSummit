@@ -216,17 +216,17 @@
     fill: none;
   }
 
-  /* Show the icon for the active theme: moon at night, sun by day. */
-  .theme-toggle .icon-sun {
+  /* Show the icon for the theme you'd switch to: sun at night, moon by day. */
+  .theme-toggle .icon-moon {
     display: none;
   }
 
   :root[data-theme='light'] .theme-toggle .icon-sun {
-    display: block;
+    display: none;
   }
 
   :root[data-theme='light'] .theme-toggle .icon-moon {
-    display: none;
+    display: block;
   }
 
   /* Waypoint nav */

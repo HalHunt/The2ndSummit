@@ -127,7 +127,7 @@ function syncThemeButton(theme: string): void {
     );
   }
   if (themeLabel) {
-    themeLabel.textContent = isLight ? 'Day' : 'Night';
+    themeLabel.textContent = isLight ? 'Dark' : 'Day';
   }
   if (themeMeta) {
     themeMeta.content = THEME_COLORS[theme] ?? THEME_COLORS.dark;
